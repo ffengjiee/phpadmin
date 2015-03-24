@@ -1,0 +1,7 @@
+{
+  "name" : "phpadmin",
+  "repositories" : [ {
+    "type" : "composer",
+    "url" : "https://packagist.org/"
+  } ]
+}
