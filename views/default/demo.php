@@ -1,4 +1,4 @@
-<?php 
+<?php
 try{
 if(isset($_GET['delete']))
 {
@@ -68,7 +68,7 @@ $(function(){
 		<form action="" method='GET' style="text-align: right">
 		<input type="text" placeholder="搜索Pk" name='search'/>
 		<input type="submit" value='search'/>
-			</form>
+		</form>
 		<div  class="state">
 		<table >
 			 <tr style='border-bottom-style: groove'>
@@ -82,7 +82,7 @@ $(function(){
 				 <td class='title'>owner</td>
 				 <td class='title'>操作</td>
 			 </tr>
-			 <?php 
+			 <?php
 			 	foreach ($status as $statu)
 			 	{
 			 ?>
@@ -97,7 +97,7 @@ $(function(){
 				 <td ><?php echo $statu['owner'];?></td>
 				 <td><a href="demo.php?delete=info&pk=<?php echo $statu['pk']; ?>">删除</a></td>
 			 </tr>
-			 <?php 
+			 <?php
 			 	}
 			 ?>
 		</table>
