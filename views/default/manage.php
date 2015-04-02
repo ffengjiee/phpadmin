@@ -8,7 +8,6 @@ if(!empty($_POST))
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if($ref['host'] == $host){
 		$res = httpRequest('http://api.icdn.me:8000/setting/u/info/','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
-		var_dump($res);
 	}
 }
 if($_GET['delete']==1)
