@@ -15,7 +15,7 @@ $config = array(
     DBDRIVER => array(
         DBHOST => '127.0.0.1:3316',
         DBUSER => 'root',
-        DBPASSWORD => '111111',
+        DBPASSWORD => '',
         DATABASE => 'phpwebadmin'
     ),
     TABLEPRE => array(

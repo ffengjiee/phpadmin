@@ -7,7 +7,8 @@ if(!empty($_POST))
 	$host = $_SERVER['HTTP_HOST'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if($ref['host'] == $host){
-		httpRequest('http://api.icdn.me:8000/setting/u/info','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
+		$res = httpRequest('http://api.icdn.me:8000/setting/u/info/','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
+		var_dump($res);
 	}
 }
 if($_GET['delete']==1)
@@ -103,7 +104,7 @@ $details = is_array($details[0])?$details:array($details);
 
 				 	<table class="<?php echo $statu['pk'];?> tble" style="display:none">
 					<tr><td colspan=2 style='text-align:center' class='close'>关闭</td></tr>
-				 	<?php foreach ($statu['options'] as $key=>$option){?>
+				 	<?php if(!empty($status['options'])) foreach ($statu['options'] as $key=>$option){?>
 				 	<tr><td><b><?php echo $key?> </b></td><td><?php echo $option?></td></tr>
 				 	<?php }?>
 				 	</table>

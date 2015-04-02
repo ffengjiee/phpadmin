@@ -99,7 +99,7 @@ function httpRequest($url, $method='get', $params=array() )
 			CURLOPT_HEADER => false,
 			CURLOPT_HTTPHEADER=>array('Authorization: Token e9a41b74bc29ed8284ad707b5e8a54a9dc36d19b'),
 			CURLOPT_FOLLOWLOCATION => false,
-
+			
 	);
 	if ($method == 'post') {
 		$curl_opts[CURLOPT_URL] = $url;
