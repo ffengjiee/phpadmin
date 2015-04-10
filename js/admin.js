@@ -33,4 +33,20 @@
     };
     
     YUI.doWhileExist('menu', switchMenuInit);
+    
+	// css计算
+	var table_width_th = $(".state table tr").eq(0).text().length*6;
+	var table_width_tr = $(".state table tr").eq(1).text().length*6 ;
+	var table_width = 0;
+	if(table_width_th > table_width_tr)
+	{
+		table_width = table_width_th > 692? table_width_th : 692;
+	}
+	else
+	{
+		table_width = table_width_tr > 692? table_width_tr : 692;
+	}
+		
+	$(".state table").css("width",table_width);
+	$(".state").css("overflow",'auto');
 })();

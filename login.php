@@ -23,10 +23,14 @@ if (isset($_POST['username']) && isset($_POST['password'])
 ) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $rs = $config[DAOIMPL]->getUserByName($username);
-    $arr = mysql_fetch_array($rs);
-    if ($arr && $arr['password'] == generateUserPassword($password)) {
+    unset($_SESSION[auth_token]);
+    $res = httpRequest('http://api.icdn.me:8001/auth-user/login','post',array('password'=>$password,'username'=>$username));
+    var_dump($res);
+    $res = json_decode($res, 1);
+ 
+    if (!empty($res) && $res['auth_token'] != '') {
         $_SESSION[SESSIONUSER] = $username;
+        $_SESSION[auth_token] = $res['auth_token'];
         header("Location: index.php");
         exit(0);
     }else {

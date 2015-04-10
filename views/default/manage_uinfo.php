@@ -6,8 +6,13 @@ if(!empty($_POST))
 		//必须是本站的删除请求
 	$host = $_SERVER['HTTP_HOST'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
-	if($ref['host'] == $host){
+	if('edit'!= $_POST['method'] && $ref['host'] == $host){
 		$res = httpRequest('http://api.icdn.me:8000/setting/u/info/','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
+	}
+	if('edit'== $_POST['method'] && $ref['host'] == $host){
+		var_dump(array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
+		$res = httpRequest('http://api.icdn.me:8000/setting/u/info/'.$_POST['pk'],'put',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
+	//	var_dump($res);
 	}
 }
 if($_GET['delete']==1)
@@ -22,7 +27,7 @@ if($_GET['delete']==1)
 }
 
 $search = $_GET['search']?$_GET['search']:'';
-$detail = httpRequest('http://api.icdn.me:8000/setting/u/detail-info/'.$search);
+$detail = httpRequest('http://api.icdn.me:8000/setting/u/info/'.$search);
 $details = json_decode($detail, true);
 $details = is_array($details[0])?$details:array($details);
 
@@ -42,7 +47,7 @@ $details = is_array($details[0])?$details:array($details);
 		  });
 		  $(".close").click(function(){
 			 $("#option table").not('.grand').hide();
-			 $("#add_form").hide();
+			 $("#add_form,#edit_form").hide();
 		  })
 		 $("#add_btn").click(function(){
 			  if($("#add_form").is(":visible") == false){
@@ -52,19 +57,34 @@ $details = is_array($details[0])?$details:array($details);
 			  }
 
 		  })
-
+		$(".edit").click(function(){
+			var details = <?php echo json_encode($details);?>;
+			  if($("#edit_form").is(":visible") == false){
+				$("#edit_form").show().addClass('showtable');
+				$("#edit_form input[name='pk']").val(details[$(this).attr("value")].pk);
+				$("#edit_form input[name='remarks']").val(details[$(this).attr("value")].remarks);
+				$("#edit_form select[name='is_global']").val(details[$(this).attr("value")].is_global+'');
+				console.log(details[$(this).attr("value")]);
+			  }else{
+				   $("#edit_form").hide().removeClass('showtable');;
+			  }
+			})
+// css计算
+	var table_width = $(".state table tr").eq(1).text().length*5 < 692 ?692 :$(".state table tr").eq(1).text().length*5;
+	$(".state table").css("width",table_width);
 })
 </script>
 <div class="mwin" id="page">
     <div class="hd radius5tr clearfix">
-        <h3>u_detail-info</h3>
+        <h3>u_info</h3>
     </div>
     <div>
+		<input type="button" class="btn" id='add_btn' value="添加" />
 		<form action="" method='GET' style="text-align: right">
-		<input type="hidden" name='view' value='manage'/>
-		<input type="text" placeholder="搜索Pk" name='search' value='<?php echo $_GET["search"]?>'/>
+		<input type="text" placeholder="搜索Pk" name='search'/>
 		<input type="submit" value='search'/>
 		</form>
+				
 		<b style="font-size: 15px">detail_info状态信息：</b>
 		<div  class="state">
 		<table >
@@ -75,10 +95,10 @@ $details = is_array($details[0])?$details:array($details);
 				 <td class='title'>created</td>
 				 <td class='title'>updated</td>
 				 <td class='title'>is_global</td>
-				 <td class='title'>option</td>
+				 <td class='title'>操作</td>
 			 </tr>
 			 <?php
-			 	foreach ($details as $statu)
+			 	foreach ($details as $iloop=>$statu)
 			 	{
 			 ?>
 			 <tr>
@@ -88,51 +108,20 @@ $details = is_array($details[0])?$details:array($details);
 				 <td ><?php echo $statu['created'];?></td>
 				 <td ><?php echo $statu['updated'];?></td>
 				 <td ><?php echo $statu['is_global'];?></td>
- 				<td class='option_detail'>查看option</td>
+ 				 <td ><a href="demo.php?view=manage_uinfo&delete=1&pk=<?php echo $statu['pk']; ?>">删除</a>
+ 				 <a class='edit' value='<?php echo $iloop; ?>'>编辑</a>
+ 				 </td>
  			 </tr>
 
 			 <?php
 			 	}
 			 ?>
 		</table>
-		<div id='option'>
-		 <?php
-			 	foreach ($details as $statu)
-			 	{
-			 ?>
-
-				 	<table class="<?php echo $statu['pk'];?> tble" style="display:none">
-					<tr><td colspan=2 style='text-align:center' class='close'>关闭</td></tr>
-				 	<?php  foreach ($statu['options'] as $key=>$option){?>
-				 	<tr><td><b><?php echo $key?> </b></td><td>
-				 	<?php 
-				 	if(is_array($option))
-				 	{
-				 		foreach ($option as $opk => $op)
-				 		{
-					 		$str = $opk .':<br><table class="grand">';
-					 		foreach ($op as $k=>$v)	
-					 		{
-					 			$str .= '<tr><td>'.$k.'</td><td>'.$v.'</td></tr>';
-					 		}
-					 		$str .= '</table><br>';
-				 		}
-				 		echo $str;
-				 	}else {
-				 		echo $option;
-				 	}
-				 	?></td></tr>
-				 	<?php }?>
-				 	</table>
-
-	    <?php
-			 	}
-			 ?>
-		</div>
 		<div id='add_form'  style="display:none">
 			<table class="<?php echo $statu['pk'];?> tble">
 				<form action='' method="post">
 					<tr><td colspan=2 style='text-align:center' class='close'>关闭</td></tr>
+					<input type="hidden" name='pk' />
 					<tr><td><b>remarks </b></td><td><input name='remarks' /></td></tr>
 					<tr><td><b>is_global</b></td><td><select  name="is_global">
 								<option value="true">true</option>
@@ -142,9 +131,22 @@ $details = is_array($details[0])?$details:array($details);
 				</form>
 			</table>
 		</div>
+		<div id='edit_form'  style="display:none">
+			<table class="<?php echo $statu['pk'];?> tble">
+				<form action='' method="post">
+					<tr><td colspan=2 style='text-align:center' class='close'>关闭</td></tr>
+					<input type="hidden" value='edit' name='method'/>
+				    <input type="hidden" value='' name='pk'/>
+					<tr><td><b>remarks </b></td><td><input name='remarks' /></td></tr>
+					<tr><td><b>is_global</b></td><td><select  name="is_global">
+								<option value='true'>true</option>
+								<option value='false'>false</option>
+							</select></td></tr>
+					<tr><td colspan=2 ><input type='submit' value='edit'/></td></tr>
+				</form>
+			</table>
 		</div>
-		
-
+		</div>
 		
     </div>
 </div>

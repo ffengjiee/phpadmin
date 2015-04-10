@@ -97,10 +97,13 @@ function httpRequest($url, $method='get', $params=array() )
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_HEADER => false,
-			CURLOPT_HTTPHEADER=>array('Authorization: Token e9a41b74bc29ed8284ad707b5e8a54a9dc36d19b'),
 			CURLOPT_FOLLOWLOCATION => false,
 			
 	);
+	if($_SESSION[auth_token])
+	{
+		$curl_opts[CURLOPT_HTTPHEADER] = array('Authorization: Token '.$_SESSION[auth_token]);
+	}
 	if ($method == 'post') {
 		$curl_opts[CURLOPT_URL] = $url;
 		$curl_opts[CURLOPT_POSTFIELDS] = $query_string;
@@ -109,12 +112,18 @@ function httpRequest($url, $method='get', $params=array() )
 		$curl_opts[CURLOPT_URL] = $url . '?' . $query_string;
 		$curl_opts[CURLOPT_CUSTOMREQUEST] = 'DELETE';
 	}
+	else if($method == 'put'){
+		$curl_opts[CURLOPT_URL] = $url ;
+		$curl_opts[CURLOPT_POSTFIELDS] = $query_string;
+		$curl_opts[CURLOPT_CUSTOMREQUEST] = 'PUT';
+	}
 	else {
 		$curl_opts[CURLOPT_URL] = $url . '?' . $query_string;
 		$curl_opts[CURLOPT_POST] = false;
 	}
 	curl_setopt_array($ch, $curl_opts);
 	$response = curl_exec($ch);
+	$status = curl_getinfo($ch);
 	if (curl_errno($ch)) {
 		throw new  Exception ( '初始化错误' );
 		//CLog::warning('curl exec fail');
@@ -122,5 +131,8 @@ function httpRequest($url, $method='get', $params=array() )
 		return 'curl_exec fail';
 	}
 	curl_close($ch);
-	return $response;
+	if($status['http_code'] == 200)
+		return $response;
+	else
+		return $status['http_code'];
 }

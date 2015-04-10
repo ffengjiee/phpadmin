@@ -7,7 +7,7 @@ $pageName = 'demo';
 $incPath = dirname(__FILE__);
 require_once "{$incPath}/inc/init.php";
 
-if ($_SESSION[SESSIONUSER] != $config[SUPERUSER]) {
+if (!$_SESSION[SESSIONUSER]) {
 	header('Content-type: text/html; charset=utf-8');
 	die('您无权查看此页！');
 }
@@ -19,7 +19,7 @@ if ($_SESSION[SESSIONUSER] != $config[SUPERUSER]) {
 /**----------------
  * config title, description, keywords
 */
-$pageTitle = 'ecdn';
+$pageTitle = 'icdn';
 
 
 /**----------------

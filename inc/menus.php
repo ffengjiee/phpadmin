@@ -15,10 +15,9 @@ $menus = array(
         'title' => '主机',
         'selected' => true,
         'items' => array(
-            array('page' => 'demo', 'text' => '状态信息', 'url' => 'demo.php'),
-        	array('page' => 'demo2', 'text' => '管理', 'url' => 'demo.php?view=manage'),
-        	array('page' => 'demo3', 'text' => '硬件信息', 'url' => 'demo.php?view=hardware'),
-        	array('page' => 'demo4', 'text' => '历史统计', 'url' => 'demo.php?view=his_Statistics'),
+            array('page' => 'demo3', 'text' => 'node', 'url' => 'demo.php'),
+        	array('page' => 'demo3', 'text' => 'node', 'url' => 'demo.php'),
+        	array('page' => 'demo4', 'text' => 'u_web', 'url' => 'demo.php?view=u_web'),
         ),
     ),
     'group_2' => array(
@@ -26,9 +25,9 @@ $menus = array(
         'title' => '域名',
         'selected' => true,
         'items' => array(
-            array('page' => 'group2_item1', 'text' => '状态信息 ', 'url' => 'user_list.php'),
-            array('page' => 'group2_item2', 'text' => '管理', 'url' => 'user_add.php'),
-            array('page' => 'group2_item3', 'text' => '历史统计', 'url' => 'demo.php'),
+            array('page' => 'group2_item1', 'text' => 'demain/ustatus', 'url' => 'demo.php?view=demain_status'),
+            array('page' => 'group2_item2', 'text' => 'demain', 'url' => 'demo.php?view=demain'),
+            array('page' => 'group2_item3', 'text' => 'u_web', 'url' => 'demo.php?view=demain_u_web'),
         ),
     ),
     'group_3' => array(
@@ -36,9 +35,10 @@ $menus = array(
         'title' => '配置',
         'selected' => true,
         'items' => array(
-            array('page' => 'group3_item1', 'text' => '默认配置', 'url' => 'user_list.php'),
-            array('page' => 'group3_item2', 'text' => '单点配置', 'url' => 'user_add.php'),
-            array('page' => 'group3_item3', 'text' => '配置应用信息', 'url' => 'demo.php'),
+            array('page' => 'group3_item1', 'text' => 'setting', 'url' => 'demo.php?view=manage'),
+            array('page' => 'group3_item2', 'text' => 'setting_uinfo', 'url' => 'demo.php?view=manage_uinfo'),
+            array('page' => 'group3_item3', 'text' => 'setting_location', 'url' => 'demo.php?view=manage_locations'),
+            array('page' => 'group3_item4', 'text' => 'setting_option', 'url' => 'demo.php?view=manage_options'),
         ),
     ),
 );
