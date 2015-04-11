@@ -5,14 +5,15 @@
  * @2012-01-01
  */
 $pageName = 'logout';
-
+$incPath = dirname(__FILE__);
+require_once "{$incPath}/inc/init.php";
 /**----------------
  * include common files
  */
 $incPath = dirname(__FILE__);
 require_once "{$incPath}/inc/constant.php";
 session_start();
-
+httpRequest('http://api.icdn.me:8001/auth-user/logout','get');
 /**----------------
  * controll logical code here
  */

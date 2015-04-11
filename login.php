@@ -41,9 +41,9 @@ if (isset($_POST['username']) && isset($_POST['password'])
 /**----------------
  * config title, description, keywords
 */
-$pageTitle = '通用网站后台系统 -php版';
-$pageDescription = '通用网站后台系统(php版)，含超级管理员、普通管理员简单两级用户系统。它能方便地整合到企业网站中，网站自身的所有管理功能，需开发者在此通用网站后台的基础上扩展实现。';
-$pageKeywords = '通用网站后台,网站后台系统,php版网站后台,简单两级用户系统';
+$pageTitle = 'icdn-后台管理';
+$pageDescription = 'icdn-后台管理';
+$pageKeywords = 'icdn';
 
 /**----------------
  * render views
