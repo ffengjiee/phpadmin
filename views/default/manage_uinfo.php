@@ -69,9 +69,7 @@ $details = is_array($details[0])?$details:array($details);
 				   $("#edit_form").hide().removeClass('showtable');;
 			  }
 			})
-// css计算
-	var table_width = $(".state table tr").eq(1).text().length*5 < 692 ?692 :$(".state table tr").eq(1).text().length*5;
-	$(".state table").css("width",table_width);
+
 })
 </script>
 <div class="mwin" id="page">

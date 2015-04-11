@@ -131,8 +131,17 @@ function httpRequest($url, $method='get', $params=array() )
 		return 'curl_exec fail';
 	}
 	curl_close($ch);
+	$return = '';
 	if($status['http_code'] == 200)
-		return $response;
+		$return = $response;
 	else
-		return $status['http_code'];
+		$return = $status['http_code'].$response;
+	$debug = '<table class="state"><tr><td>url:</td><td>'.$url.'</td></tr>';
+	$debug .= '<tr><td>$method:</td><td>'.$method.'</td></tr>';
+	$debug .= '<tr><td>$params:</td><td>'.var_export($params,1).'</td></tr>';
+	$debug .= '<tr><td>result:</td><td>'.var_export($return,1).'</td></tr>';
+	$debug .= '</table>';
+	if(DEGUG)
+	echo $debug;
+	return $return;
 }

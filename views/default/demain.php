@@ -7,15 +7,20 @@ if(!empty($_POST))
 	$host = $_SERVER['HTTP_HOST'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if($_POST['method']=='add' && $ref['host'] == $host){
-		$res = httpRequest('http://api.icdn.me:8000/demain/u/info/','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
+		settype($_POST['isalive'],'boolean');
+		settype($_POST['beian'],'boolean');
+		$res = httpRequest('http://api.icdn.me:8000/demain/u/info/','post',$_POST);
+
 		if($res === false)
 		{
 			$add = 'fail';
 		}
 	}
 	if($_POST['method']=='edit' && $ref['host'] == $host){
-		$res = httpRequest('http://api.icdn.me:8000/demain/u/info','put',$_POST);
-		var_dump($res);
+		settype($_POST['isalive'],'boolean');
+		settype($_POST['beian'],'boolean');
+		$res = httpRequest('http://api.icdn.me:8000/demain/u/info/'.$_POST['pk'],'put',$_POST);
+
 		if($res === false)
 		{
 			$edit = 'fail';
@@ -68,12 +73,13 @@ $details = is_array($details[0])?$details:array($details);
 			var details = <?php echo json_encode($details);?>;
 			  if($("#edit_form").is(":visible") == false){
 				$("#edit_form").show().addClass('showtable');
+				$("#edit_form input[name='pk']").val(details[$(this).attr("value")].pk);
 				$("#edit_form input[name='full_domain']").val(details[$(this).attr("value")].full_domain);
 				$("#edit_form input[name='root_domain']").val(details[$(this).attr("value")].root_domain);
 				$("#edit_form input[name='remarks']").val(details[$(this).attr("value")].remarks);
 				$("#edit_form input[name='setting']").val(details[$(this).attr("value")].setting);
-				$("#edit_form select[name='isalive']").val(details[$(this).attr("value")].isalive);
-				$("#edit_form select[name='beian']").val(details[$(this).attr("value")].beian);
+				$("#edit_form select[name='isalive']").val(details[$(this).attr("value")].isalive+'');
+				$("#edit_form select[name='beian']").val(details[$(this).attr("value")].beian+'');
 				console.log(details);
 			  }else{
 				   $("#edit_form").hide().removeClass('showtable');;
@@ -156,6 +162,7 @@ $details = is_array($details[0])?$details:array($details);
 				<form action='' method="post">
 				    <input type="hidden" value='edit' name='method'/>
 				    <input type="hidden" value='demain' name='view'/>
+				    <input type='hidden' value='' name='pk'/>
 					<tr><td colspan=2 style='text-align:center' class='close'>关闭</td></tr>
 					<tr><td><b><require>full_domain</require> </b></td><td><input name='full_domain' /></td></tr>
 					<tr><td><b>root_domain </b></td><td><input name='root_domain' /></td></tr>

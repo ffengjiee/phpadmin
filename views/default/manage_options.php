@@ -10,8 +10,15 @@ if(!empty($_POST))
 		$res = httpRequest('http://api.icdn.me:8000/setting/u/options/','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
 	}
 	if('edit'== $_POST['method'] && $ref['host'] == $host){
-		var_dump(array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
+		settype($_POST['gzip'],'boolean');
+		settype($_POST['proxy_buffering'],'boolean');
+		settype($_POST['proxy_cache'],'boolean');
+		settype($_POST['proxy_cache_lock'],'boolean');
+		settype($_POST['proxy_ignore_client_abort'],'boolean');
+		settype($_POST['proxy_intercept_errors'],'boolean');
 		$res = httpRequest('http://api.icdn.me:8000/setting/u/options/'.$_POST['pk'],'put',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
+		//
+		var_dump($res);
 	}
 }
 if($_GET['delete']==1)
@@ -67,9 +74,27 @@ $details = is_array($details[0])?$details:array($details);
 			  if($("#edit_form").is(":visible") == false){
 				$("#edit_form").show().addClass('showtable');
 				$("#alpha").show().css('z-index',2);
-				$("#edit_form input[name='pk']").val(details[$(this).attr("value")].pk);
-				$("#edit_form input[name='remarks']").val(details[$(this).attr("value")].remarks);
-				$("#edit_form select[name='is_global']").val(details[$(this).attr("value")].is_global+'');
+				$("#edit_form input[name='pk']").val(details[$(this).attr("value")].pk+'');
+				$("#edit_form select[name='gzip']").val(details[$(this).attr("value")].gzip+'');
+				$("#edit_form input[name='gzip_min_length']").val(details[$(this).attr("value")].gzip_min_length+'');
+				$("#edit_form input[name='gzip_comp_level']").val(details[$(this).attr("value")].gzip_comp_level+'');
+				$("#edit_form input[name='gzip_types']").val(details[$(this).attr("value")].gzip_types+'');
+				$("#edit_form input[name='gzip_disable']").val(details[$(this).attr("value")].gzip_disable+'');
+				$("#edit_form select[name='proxy_buffering']").val(details[$(this).attr("value")].proxy_buffering+'');
+				$("#edit_form select[name='proxy_cache']").val(details[$(this).attr("value")].proxy_cache+'');
+				$("#edit_form input[name='proxy_cache_key']").val(details[$(this).attr("value")].proxy_cache_key+'');
+				$("#edit_form select[name='proxy_cache_lock']").val(details[$(this).attr("value")].proxy_cache_lock+'');
+				$("#edit_form input[name='proxy_cache_lock_timeout']").val(details[$(this).attr("value")].proxy_cache_lock_timeout+'');
+				$("#edit_form input[name='proxy_cache_min_uses']").val(details[$(this).attr("value")].proxy_cache_min_uses+'');
+				$("#edit_form input[name='proxy_cache_use_stale']").val(details[$(this).attr("value")].proxy_cache_use_stale+'');
+				$("#edit_form input[name='proxy_cache_valid_httpcode']").val(details[$(this).attr("value")].proxy_cache_valid_httpcode+'');
+				$("#edit_form input[name='proxy_cache_valid_time']").val(details[$(this).attr("value")].proxy_cache_valid_time+'');
+				$("#edit_form input[name='proxy_hide_header']").val(details[$(this).attr("value")].proxy_hide_header+'');
+				$("#edit_form select[name='proxy_ignore_client_abort']").val(details[$(this).attr("value")].proxy_ignore_client_abort+'');
+				$("#edit_form select[name='proxy_intercept_errors']").val(details[$(this).attr("value")].proxy_intercept_errors+'');
+				$("#edit_form input[name='proxy_no_cache']").val(details[$(this).attr("value")].proxy_no_cache+'');
+				$("#edit_form input[name='proxy_set_header']").val(details[$(this).attr("value")].proxy_set_header+'');
+				$("#edit_form input[name='index']").val(details[$(this).attr("value")].index+'');
 				console.log(details[$(this).attr("value")]);
 			  }else{
 				   $("#edit_form").hide().removeClass('showtable');
@@ -94,6 +119,7 @@ $details = is_array($details[0])?$details:array($details);
 		<div  class="state">
 		<table >
 			 <tr style='border-bottom-style: groove'>
+			 	<td class='title'>pk</td>
 				<td class='title'>gzip</td>
 				<td class='title'>gzip_min_length</td>
 				<td class='title'>gzip_comp_level</td>
@@ -123,6 +149,7 @@ $details = is_array($details[0])?$details:array($details);
 			 ?>
 			 <tr>
 			    <td style='display: none'><?php echo $iloop;?></td>
+			    <td ><?php echo $statu['pk'];?></td>
 				<td ><?php echo $statu['gzip'];?></td>
 				<td ><?php echo $statu['gzip_min_length'];?></td>
 				<td ><?php echo $statu['gzip_comp_level'];?></td>

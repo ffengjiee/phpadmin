@@ -5,6 +5,7 @@
  * by lane @2012-01-01
 */
 //basic
+define('DEGUG', true);
 define('VERSION', 'version');
 define('SITENAME', 'sitename');
 define('BASEURL', 'baseurl');

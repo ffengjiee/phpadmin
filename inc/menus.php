@@ -16,7 +16,6 @@ $menus = array(
         'selected' => true,
         'items' => array(
             array('page' => 'demo3', 'text' => 'node', 'url' => 'demo.php'),
-        	array('page' => 'demo3', 'text' => 'node', 'url' => 'demo.php'),
         	array('page' => 'demo4', 'text' => 'u_web', 'url' => 'demo.php?view=u_web'),
         ),
     ),
@@ -25,8 +24,9 @@ $menus = array(
         'title' => '域名',
         'selected' => true,
         'items' => array(
+        	array('page' => 'group2_item2', 'text' => 'demain', 'url' => 'demo.php?view=demain'),
             array('page' => 'group2_item1', 'text' => 'demain/ustatus', 'url' => 'demo.php?view=demain_status'),
-            array('page' => 'group2_item2', 'text' => 'demain', 'url' => 'demo.php?view=demain'),
+          
             array('page' => 'group2_item3', 'text' => 'u_web', 'url' => 'demo.php?view=demain_u_web'),
         ),
     ),

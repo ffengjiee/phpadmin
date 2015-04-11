@@ -69,6 +69,7 @@ $(function(){
 		<input type="text" placeholder="搜索Pk" name='search'/>
 		<input type="submit" value='search'/>
 		</form>
+		<b style="font-size: 15px">u_info状态信息：</b>
 		<div  class="state">
 		<table >
 			 <tr style='border-bottom-style: groove'>
@@ -102,8 +103,6 @@ $(function(){
 			 ?>
 		</table>
 		</div>
-		<br>
-		<br>
 		<br>
 		<?php require_once 'ipDemo.php';?>
 		<?php require_once 'diskDemo.php';?>
