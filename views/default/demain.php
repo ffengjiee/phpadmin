@@ -9,7 +9,7 @@ if(!empty($_POST))
 	if($_POST['method']=='add' && $ref['host'] == $host){
 		settype($_POST['isalive'],'boolean');
 		settype($_POST['beian'],'boolean');
-		$res = httpRequest('http://api.icdn.me:8000/demain/u/info/','post',$_POST);
+		$res = httpRequest('http://api.icdn.me:8000/domain/u/info/','post',$_POST);
 
 		if($res === false)
 		{
@@ -19,7 +19,7 @@ if(!empty($_POST))
 	if($_POST['method']=='edit' && $ref['host'] == $host){
 		settype($_POST['isalive'],'boolean');
 		settype($_POST['beian'],'boolean');
-		$res = httpRequest('http://api.icdn.me:8000/demain/u/info/'.$_POST['pk'],'put',$_POST);
+		$res = httpRequest('http://api.icdn.me:8000/domain/u/info/'.$_POST['pk'],'put',$_POST);
 
 		if($res === false)
 		{
@@ -34,7 +34,7 @@ if($_GET['delete']==1)
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if(isset($_GET['pk']) && $ref['host'] == $host)
 	{
-		$status = httpRequest('http://api.icdn.me:8000/demain/u/info/'.$_GET['pk'], 'delete');
+		$status = httpRequest('http://api.icdn.me:8000/domain/u/info/'.$_GET['pk'], 'delete');
 	}
 }
 
@@ -141,6 +141,7 @@ $details = is_array($details[0])?$details:array($details);
 				<form action='' method="post">
 				    <input type="hidden" value='add' name='method'/>
 					<tr><td colspan=2 style='text-align:center' class='close'>关闭</td></tr>
+					<tr><td><b><require>pk</require> </b></td><td><input name='pk' /></td></tr>
 					<tr><td><b><require>full_domain</require> </b></td><td><input name='full_domain' /></td></tr>
 					<tr><td><b>root_domain </b></td><td><input name='root_domain' /></td></tr>
 					<tr><td><b>isalive</b></td><td><select  name="isalive">
