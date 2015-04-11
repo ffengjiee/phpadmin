@@ -1,6 +1,6 @@
 <?php
 $search = $_GET['search']?$_GET['search']:'';
-$detail = httpRequest('http://api.icdn.me:8000/demain/u/web/'.$search);
+$detail = httpRequest('http://api.icdn.me:8000/domain/u/web/'.$search);
 $details = json_decode($detail, true);
 $details = is_array($details[0])?$details:array($details);
 
