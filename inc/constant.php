@@ -2,10 +2,10 @@
 /*
  * constant
  * include const define
- * by lane @2012-01-01
+ * by feng 2015 04 12
 */
 //basic
-define('DEGUG', true);
+define('DEGUG', true);  // debug flag
 define('VERSION', 'version');
 define('SITENAME', 'sitename');
 define('BASEURL', 'baseurl');

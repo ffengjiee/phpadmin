@@ -111,6 +111,7 @@ $details = is_array($details[0])?$details:array($details);
     <div>
 		<input type="button" class="btn" id='add_btn' value="添加" />
 		<form action="" method='GET' style="text-align: right">
+				<input type="hidden" name='view' value='manage_options'/>
 		<input type="text" placeholder="搜索Pk" name='search'/>
 		<input type="submit" value='search'/>
 		</form>

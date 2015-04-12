@@ -7,11 +7,10 @@ if(!empty($_POST))
 	$host = $_SERVER['HTTP_HOST'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if('edit'!= $_POST['method'] && $ref['host'] == $host){
-		$res = httpRequest('http://api.icdn.me:8000/setting/u/info/','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
+		$res = httpRequest('http://api.icdn.me:8000/setting/u/info/','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)($_POST['is_global']=='true')));
 	}
 	if('edit'== $_POST['method'] && $ref['host'] == $host){
-		var_dump(array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
-		$res = httpRequest('http://api.icdn.me:8000/setting/u/info/'.$_POST['pk'],'put',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
+		$res = httpRequest('http://api.icdn.me:8000/setting/u/info/'.$_POST['pk'],'put',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)($_POST['is_global']=='true')));
 	//	var_dump($res);
 	}
 }
@@ -79,6 +78,7 @@ $details = is_array($details[0])?$details:array($details);
     <div>
 		<input type="button" class="btn" id='add_btn' value="添加" />
 		<form action="" method='GET' style="text-align: right">
+		<input type="hidden" name='view' value='manage_uinfo'/>
 		<input type="text" placeholder="搜索Pk" name='search'/>
 		<input type="submit" value='search'/>
 		</form>
@@ -105,7 +105,7 @@ $details = is_array($details[0])?$details:array($details);
 				 <td ><?php echo $statu['owner'];?></td>
 				 <td ><?php echo $statu['created'];?></td>
 				 <td ><?php echo $statu['updated'];?></td>
-				 <td ><?php echo $statu['is_global'];?></td>
+				 <td ><?php echo $statu['is_global']==true?'true':'false';?></td>
  				 <td ><a href="demo.php?view=manage_uinfo&delete=1&pk=<?php echo $statu['pk']; ?>">删除</a>
  				 <a class='edit' value='<?php echo $iloop; ?>'>编辑</a>
  				 </td>

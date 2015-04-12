@@ -9,7 +9,7 @@ if(isset($_GET['delete']))
 	{
 		$status = httpRequest('http://api.icdn.me:8000/node/u/info/'.$_GET['pk'], 'delete');
 	}
-	if(isset($_GET['pk']) && $ref['host'] == $host && $_GET['delete']=='ip')
+/* 	if(isset($_GET['pk']) && $ref['host'] == $host && $_GET['delete']=='ip')
 	{
 		$status = httpRequest('http://api.icdn.me:8000/node/u/ip/'.$_GET['pk'], 'delete');
 	}
@@ -24,14 +24,14 @@ if(isset($_GET['delete']))
 	if(isset($_GET['pk']) && $ref['host'] == $host && $_GET['delete']=='hardware')
 	{
 		$status = httpRequest('http://api.icdn.me:8000/node/u/disk/'.$_GET['pk'], 'delete');
-	}
+	} */
 }
 $search = $_GET['search']?$_GET['search']:'';
 $status = httpRequest('http://api.icdn.me:8000/node/u/info/'.$search);
 $status = json_decode($status, true);
 $status = is_array($status[0])?$status:array($status);
 
-$statu_ip = httpRequest('http://api.icdn.me:8000/node/u/ip/'.$search);
+/* $statu_ip = httpRequest('http://api.icdn.me:8000/node/u/ip/'.$search);
 $status_ips= json_decode($statu_ip, true);
 $status_ips = is_array($status_ips[0])?$status_ips:array($status_ips);
 
@@ -45,7 +45,7 @@ $statu_status = is_array($statu_status[0])?$statu_status:array($statu_status);
 
 $statu_hardware = httpRequest('http://api.icdn.me:8000/node/u/hardware/'.$search);
 $statu_hardware= json_decode($statu_hardware, true);
-$statu_hardware = is_array($statu_hardware[0])?$statu_hardware:array($statu_hardware);
+$statu_hardware = is_array($statu_hardware[0])?$statu_hardware:array($statu_hardware); */
 }catch (Exception  $e)
 {
 	echo '网络连接错误';
@@ -81,6 +81,7 @@ $(function(){
 				 <td class='title'>remarks</td>
 				 <td class='title'>pk</td>
 				 <td class='title'>owner</td>
+				 <td class='title'>lock</td>
 				 <td class='title'>操作</td>
 			 </tr>
 			 <?php
@@ -96,6 +97,7 @@ $(function(){
 				 <td ><?php echo $statu['remarks'];?></td>
 				 <td><?php echo $statu['pk'];?></td>
 				 <td ><?php echo $statu['owner'];?></td>
+				  <td ><?php echo $statu['lock']==true?'true':'false';?></td>
 				 <td><a href="demo.php?delete=info&pk=<?php echo $statu['pk']; ?>">删除</a></td>
 			 </tr>
 			 <?php
@@ -104,9 +106,9 @@ $(function(){
 		</table>
 		</div>
 		<br>
-		<?php require_once 'ipDemo.php';?>
-		<?php require_once 'diskDemo.php';?>
-		<?php require_once 'statusDemo.php';?>
-		<?php require_once 'hardWareDemo.php';?>
+		<?php // require_once 'ipDemo.php';?>
+		<?php // require_once 'diskDemo.php';?>
+		<?php // require_once 'statusDemo.php';?>
+		<?php // require_once 'hardWareDemo.php';?>
     </div>
 </div>

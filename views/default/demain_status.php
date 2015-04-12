@@ -14,7 +14,7 @@ if(!empty($_POST))
 		}
 	} */
 	if($_POST['method']=='edit' && $ref['host'] == $host){
-		$res = httpRequest('http://api.icdn.me:8000/demain/u/status','put',$_POST);
+		$res = httpRequest('http://api.icdn.me:8000/domain/u/status/'.$_POST['pk'],'put',$_POST);
 		var_dump($res);
 		if($res === false)
 		{
@@ -29,7 +29,7 @@ if($_GET['delete']==1)
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if(isset($_GET['pk']) && $ref['host'] == $host)
 	{
-		$status = httpRequest('http://api.icdn.me:8000/demain/u/status/'.$_GET['pk'], 'delete');
+		$status = httpRequest('http://api.icdn.me:8000/domain/u/status/'.$_GET['pk'], 'delete');
 	}
 }
 
@@ -69,11 +69,10 @@ $details = is_array($details[0])?$details:array($details);
 			  if($("#edit_form").is(":visible") == false){
 				$("#edit_form").show().addClass('showtable');
 				$("#edit_form input[name='pk']").val(details[$(this).attr("value")].id);
-				$("#edit_form select[name='sync_status']").val("'"+details[$(this).attr("value")].sync_status+"'");
+				$("#edit_form select[name='sync_status']").val(details[$(this).attr("value")].sync_status+'');
 				$("#edit_form input[name='node_num']").val(details[$(this).attr("value")].node_num);
 				$("#edit_form input[name='netflow_used']").val(details[$(this).attr("value")].netflow_used);
 				$("#edit_form input[name='domain']").val(details[$(this).attr("value")].domain);
-				console.log(details);
 			  }else{
 				   $("#edit_form").hide().removeClass('showtable');;
 			  }
@@ -116,7 +115,7 @@ $details = is_array($details[0])?$details:array($details);
 			 ?>
 			 <tr>
 			 	 <td class='pk'><?php echo $statu['id'];?></td>
-				 <td ><?php echo $statu['sync_status'];?></td>
+				 <td ><?php echo $statu['sync_status']==true?'true':'false';?></td>
 				 <td ><?php echo $statu['node_num'];?></td>
 				 <td ><?php echo $statu['netflow_used'];?></td>
 				 <td ><?php echo $statu['updated'];?></td>

@@ -5,7 +5,7 @@
  * @2012-01-01
 */
 $config = array(
-    SITENAME => 'Easy-CDN后台管理系统',
+    SITENAME => '后台管理系统',
     VERSION => '1.0',
 
     PREKEY4PASSWORD => 'padm_',

@@ -87,7 +87,7 @@ $details = is_array($details[0])?$details:array($details);
 				 <td ><?php echo $statu['owner'];?></td>
 				 <td ><?php echo $statu['created'];?></td>
 				 <td ><?php echo $statu['updated'];?></td>
-				 <td ><?php echo $statu['is_global'];?></td>
+				 <td ><?php echo $statu['is_global']==true?'true':'false';?></td>
  				<td class='option_detail'>查看option</td>
  			 </tr>
 

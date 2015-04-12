@@ -6,9 +6,10 @@ if(!empty($_POST))
 		//必须是本站的删除请求
 	$host = $_SERVER['HTTP_HOST'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
+	$_POST['isalive'] = $_POST['isalive'] == 'true';
+	$_POST['beian'] = $_POST['beian'] == 'true';
 	if($_POST['method']=='add' && $ref['host'] == $host){
-		settype($_POST['isalive'],'boolean');
-		settype($_POST['beian'],'boolean');
+		
 		$res = httpRequest('http://api.icdn.me:8000/domain/u/info/','post',$_POST);
 
 		if($res === false)
@@ -17,8 +18,6 @@ if(!empty($_POST))
 		}
 	}
 	if($_POST['method']=='edit' && $ref['host'] == $host){
-		settype($_POST['isalive'],'boolean');
-		settype($_POST['beian'],'boolean');
 		$res = httpRequest('http://api.icdn.me:8000/domain/u/info/'.$_POST['pk'],'put',$_POST);
 
 		if($res === false)
@@ -123,9 +122,9 @@ $details = is_array($details[0])?$details:array($details);
 			 	 <td class='pk'><?php echo $statu['pk'];?></td>
 				 <td ><?php echo $statu['full_domain'];?></td>
 				 <td ><?php echo $statu['root_domain'];?></td>
-				 <td ><?php echo $statu['isalive'];?></td>
+				 <td ><?php echo $statu['isalive']==true?'true':'false';?></td>
 				 <td ><?php echo $statu['remarks'];?></td>
-				 <td ><?php echo $statu['beian'];?></td>
+				 <td ><?php echo $statu['beian']==true?'true':'false';?></td>
 				 <td ><?php echo $statu['created'];?></td>
 				 <td ><?php echo $statu['created'];?></td>
 				 <td><a href="demo.php?view=demain&delete=1&pk=<?php echo $statu['pk']; ?>">删除</a><a class='edit' value=<?php echo $iloop; ?>>编辑</a></td>

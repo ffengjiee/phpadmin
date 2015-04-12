@@ -4,7 +4,8 @@
     </div>
     <div class="bd">
         <ul>
-            <?php foreach ($menus as $group) { ?>
+            <?php
+             foreach ($menus as $group) { ?>
             <li class="item<?php echo $group['groupClass']?' '.$group['groupClass']:'';echo $group['selected']?' '.$extendArr['selected']:''; ?>">
                 <h4 class="clearfix">
                     <span><?php echo $group['title']; ?></span>
@@ -12,10 +13,11 @@
                 </h4>
                 <ul class="links">
                 <?php foreach ($group['items'] as $item) { ?>
-                    <?php if ($item['page'] != $pageName) { ?>
-                    <li><a href="<?php echo $item['url']; ?>"><?php echo $item['text']; ?></a></li>
+                    <?php if ( $item['page'] == $_GET['view'] || (empty($_GET['view']) && $item['page'] == 'demo' &&  basename($_SERVER[SCRIPT_NAME])=='demo.php') ) { ?>
+                    <li><strong style="color: red"><?php echo $item['text']; ?></strong></li>
                     <?php }else { ?>
-                    <li><strong><?php echo $item['text']; ?></strong></li>
+                     <li><a href="<?php echo $item['url']; ?>"><?php echo $item['text']; ?></a></li>
+                 
                     <?php } ?>
                 <?php } ?>
                 </ul>

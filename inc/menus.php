@@ -15,30 +15,34 @@ $menus = array(
         'title' => '主机',
         'selected' => true,
         'items' => array(
-            array('page' => 'demo3', 'text' => 'node', 'url' => 'demo.php'),
-        	array('page' => 'demo4', 'text' => 'u_web', 'url' => 'demo.php?view=u_web'),
+            array('page' => 'demo', 'text' => 'node', 'url' => 'demo.php'),
+        	array('page' => 'node_ip', 'text' => 'node_ip', 'url' => 'demo.php?view=node_ip'),
+        	array('page' => 'node_disk', 'text' => 'node_disk', 'url' => 'demo.php?view=node_disk'),
+        	array('page' => 'node_status', 'text' => 'node_status', 'url' => 'demo.php?view=node_status'),
+        	array('page' => 'node_hard', 'text' => 'node_hard', 'url' => 'demo.php?view=node_hard'),
+        	array('page' => 'u_web', 'text' => 'u_web', 'url' => 'demo.php?view=u_web'),
         ),
     ),
     'group_2' => array(
         'groupClass' => 'media',
         'title' => '域名',
-        'selected' => true,
+        'selected' => false,
         'items' => array(
-        	array('page' => 'group2_item2', 'text' => 'demain', 'url' => 'demo.php?view=demain'),
-            array('page' => 'group2_item1', 'text' => 'demain/ustatus', 'url' => 'demo.php?view=demain_status'),
+        	array('page' => 'demain', 'text' => 'demain', 'url' => 'demo.php?view=demain'),
+            array('page' => 'demain_status', 'text' => 'demain/ustatus', 'url' => 'demo.php?view=demain_status'),
           
-            array('page' => 'group2_item3', 'text' => 'u_web', 'url' => 'demo.php?view=demain_u_web'),
+            array('page' => 'demain_u_web', 'text' => 'u_web', 'url' => 'demo.php?view=demain_u_web'),
         ),
     ),
     'group_3' => array(
         'groupClass' => 'comments',
         'title' => '配置',
-        'selected' => true,
+        'selected' => false,
         'items' => array(
-            array('page' => 'group3_item1', 'text' => 'setting', 'url' => 'demo.php?view=manage'),
-            array('page' => 'group3_item2', 'text' => 'setting_uinfo', 'url' => 'demo.php?view=manage_uinfo'),
-            array('page' => 'group3_item3', 'text' => 'setting_location', 'url' => 'demo.php?view=manage_locations'),
-            array('page' => 'group3_item4', 'text' => 'setting_option', 'url' => 'demo.php?view=manage_options'),
+            array('page' => 'manage', 'text' => 'setting', 'url' => 'demo.php?view=manage'),
+            array('page' => 'manage_uinfo', 'text' => 'setting_uinfo', 'url' => 'demo.php?view=manage_uinfo'),
+            array('page' => 'manage_locations', 'text' => 'setting_location', 'url' => 'demo.php?view=manage_locations'),
+            array('page' => 'manage_options', 'text' => 'setting_option', 'url' => 'demo.php?view=manage_options'),
         ),
     ),
 );
@@ -59,9 +63,11 @@ if ($_SESSION[SESSIONUSER] == $config[SUPERUSER]) {
 //group extend check
 foreach ($menus as $key => $group) {
     foreach ($group['items'] as $item) {
-        if ($pageName == $item['page']) {
+        if ($_GET['view'] == $item['page']) {
             $menus[$key]['selected'] = true;
+            
             break;
         }
+       // echo $key.'view='.$_GET['view'] .'text='.$item['text'].'<br>';
     }
 }
