@@ -1,4 +1,5 @@
 <?php
+error_reporting(8);
 //优先添加
 if(!empty($_POST))
 {
@@ -9,7 +10,7 @@ if(!empty($_POST))
 	$_POST['isalive'] = $_POST['isalive'] == 'true';
 	$_POST['beian'] = $_POST['beian'] == 'true';
 	if($_POST['method']=='add' && $ref['host'] == $host){
-		
+
 		$res = httpRequest('http://api.icdn.me:8000/domain/u/info/','post',$_POST);
 
 		if($res === false)
@@ -134,7 +135,7 @@ $details = is_array($details[0])?$details:array($details);
 			 	}
 			 ?>
 		</table>
-		
+
 		<div id='add_form'  style="display:none">
 			<table class="<?php echo $statu['pk'];?> tble">
 				<form action='' method="post">

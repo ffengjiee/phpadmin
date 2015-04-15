@@ -5,7 +5,7 @@
  * @2012-01-01
  */
 $pageName = 'login';
-$needDb = true; //enable db
+//$needDb = true; //enable db
 
 /**----------------
  * include common files
@@ -27,7 +27,7 @@ if (isset($_POST['username']) && isset($_POST['password'])
     $res = httpRequest('http://api.icdn.me:8001/auth-user/login','post',array('password'=>$password,'username'=>$username));
     var_dump($res);
     $res = json_decode($res, 1);
- 
+
     if (!empty($res) && $res['auth_token'] != '') {
         $_SESSION[SESSIONUSER] = $username;
         $_SESSION[auth_token] = $res['auth_token'];
