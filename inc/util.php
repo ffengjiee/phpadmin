@@ -98,7 +98,7 @@ function httpRequest($url, $method='get', $params=array() )
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_HEADER => false,
 			CURLOPT_FOLLOWLOCATION => false,
-			
+
 	);
 	if($_SESSION[auth_token])
 	{
@@ -107,7 +107,7 @@ function httpRequest($url, $method='get', $params=array() )
 	if ($method == 'post') {
 		$curl_opts[CURLOPT_URL] = $url;
 		$curl_opts[CURLOPT_POSTFIELDS] = $query_string;
-	} 
+	}
 	else if($method == 'delete'){
 		$curl_opts[CURLOPT_URL] = $url . '?' . $query_string;
 		$curl_opts[CURLOPT_CUSTOMREQUEST] = 'DELETE';

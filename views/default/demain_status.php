@@ -4,7 +4,7 @@ if(!empty($_POST))
 {
 	$add = $edit = 'success';
 		//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 /* 	if($_POST['method']=='add' && $ref['host'] == $host){
 		$res = httpRequest('http://api.icdn.me:8000/demain/u/status/','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
@@ -25,7 +25,7 @@ if(!empty($_POST))
 if($_GET['delete']==1)
 {
 	//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if(isset($_GET['pk']) && $ref['host'] == $host)
 	{
@@ -85,7 +85,7 @@ $details = is_array($details[0])?$details:array($details);
 		window.location.reload();
 	})
 })
- 
+
 </script>
 <div class="mwin" id="page">
     <div class="hd radius5tr clearfix">

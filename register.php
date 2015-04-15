@@ -5,7 +5,7 @@
  * @2012-01-01
  */
 $pageName = 'login';
-$needDb = true; //enable db
+//$needDb = true; //enable db
 
 /**----------------
  * include common files

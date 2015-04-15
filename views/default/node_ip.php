@@ -3,7 +3,7 @@ try{
 if(isset($_GET['delete']))
 {
 	//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if(isset($_GET['pk']) && $ref['host'] == $host && $_GET['delete']=='ip')
 	{
@@ -57,10 +57,10 @@ $(function(){
 				 <td class='title'>ip_class</td>
 				 <td class='title'>networkcard</td>
 				 <td class='title'>node</td>
-				 
+
 				 <td class='title'>操作</td>
 			 </tr>
-			 <?php 
+			 <?php
 			 	foreach ($status_ips as $status_ip)
 			 	{
 			 ?>
@@ -79,7 +79,7 @@ $(function(){
 				 <td ><?php echo $status_ip['node'];?></td>
 				 <td><a href="demo.php?delete=ip&pk=<?php echo $status_ip['pk']; ?>">删除</a></td>
 			 </tr>
-			 <?php 
+			 <?php
 			 	}
 			 ?>
 		</table>

@@ -3,7 +3,7 @@ try{
 if(isset($_GET['delete']))
 {
 	//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if(isset($_GET['pk']) && $ref['host'] == $host && $_GET['delete']=='disk')
 	{
@@ -54,10 +54,10 @@ $(function(){
 				 <td class='title'>rest</td>
 				 <td class='title'>percent</td>
 				 <td class='title'>node</td>
-				 
+
 				 <td class='title'>操作</td>
 			 </tr>
-			 <?php 
+			 <?php
 			 	foreach ($statu_disks as $status_disk)
 			 	{
 			 ?>
@@ -72,7 +72,7 @@ $(function(){
 				 <td ><?php echo $status_disk['node'];?></td>
 				 <td><a href="demo.php?delete=disk&pk=<?php echo $status_disk['pk']; ?>">删除</a></td>
 			 </tr>
-			 <?php 
+			 <?php
 			 	}
 			 ?>
 		</table>

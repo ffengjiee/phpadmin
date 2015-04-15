@@ -1,11 +1,10 @@
 <?php
-error_reporting(8);
 //优先添加
 if(!empty($_POST))
 {
 	$add = $edit = 'success';
 		//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	$_POST['isalive'] = $_POST['isalive'] == 'true';
 	$_POST['beian'] = $_POST['beian'] == 'true';
@@ -30,7 +29,7 @@ if(!empty($_POST))
 if($_GET['delete']==1)
 {
 	//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if(isset($_GET['pk']) && $ref['host'] == $host)
 	{

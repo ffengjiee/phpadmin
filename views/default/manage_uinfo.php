@@ -4,7 +4,7 @@
 if(!empty($_POST))
 {
 		//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if('edit'!= $_POST['method'] && $ref['host'] == $host){
 		$res = httpRequest('http://api.icdn.me:8000/setting/u/info/','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)($_POST['is_global']=='true')));
@@ -17,7 +17,7 @@ if(!empty($_POST))
 if($_GET['delete']==1)
 {
 	//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if(isset($_GET['pk']) && $ref['host'] == $host)
 	{
@@ -82,7 +82,7 @@ $details = is_array($details[0])?$details:array($details);
 		<input type="text" placeholder="搜索Pk" name='search'/>
 		<input type="submit" value='search'/>
 		</form>
-				
+
 		<b style="font-size: 15px">detail_info状态信息：</b>
 		<div  class="state">
 		<table >
@@ -145,6 +145,6 @@ $details = is_array($details[0])?$details:array($details);
 			</table>
 		</div>
 		</div>
-		
+
     </div>
 </div>

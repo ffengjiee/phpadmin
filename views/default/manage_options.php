@@ -4,7 +4,7 @@
 if(!empty($_POST))
 {
 		//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if('edit'!= $_POST['method'] && $ref['host'] == $host){
 		$res = httpRequest('http://api.icdn.me:8000/setting/u/options/','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
@@ -24,7 +24,7 @@ if(!empty($_POST))
 if($_GET['delete']==1)
 {
 	//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if(isset($_GET['pk']) && $ref['host'] == $host)
 	{
@@ -115,7 +115,7 @@ $details = is_array($details[0])?$details:array($details);
 		<input type="text" placeholder="搜索Pk" name='search'/>
 		<input type="submit" value='search'/>
 		</form>
-				
+
 		<b style="font-size: 15px">detail_options状态信息：</b>
 		<div  class="state">
 		<table >
@@ -191,14 +191,14 @@ $details = is_array($details[0])?$details:array($details);
 					<tr><td colspan=2 style='text-align:center' class='close'>关闭</td></tr>
 				 	<?php  foreach ($statu['locations_set'] as $key=>$option){?>
 				 	<tr><td><b><?php  echo $key?> </b></td><td>
-				 	<?php 
+				 	<?php
 				 	if(is_array($option))
 				 	{
 				 		$str = '<br><table class="grand">';
 				 		foreach ($option as $opk => $op)
 				 		{
 					 			$str .= '<tr><td>'.$opk.'</td><td>'.$op.'</td></tr>';
-					 		
+
 				 		}
 				 		$str .= '</table><br>';
 				 		echo $str;
@@ -339,7 +339,7 @@ $details = is_array($details[0])?$details:array($details);
 					<td>
 					<input class="parameter" minlength="0" name="index" placeholder="" type="text" value="">
 					</td>
-					 </tr> 
+					 </tr>
 					<tr><td colspan=2 ><input type='submit' value='edit'/></td></tr>
 				</form>
 			</table>

@@ -3,7 +3,7 @@ try{
 if(isset($_GET['delete']))
 {
 	//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if(isset($_GET['pk']) && $ref['host'] == $host && $_GET['delete']=='hardware')
 	{
@@ -49,10 +49,10 @@ $(function(){
 				 <td class='title'>phymem</td>
 				 <td class='title'>swapmem</td>
 				 <td class='title'>disk</td>
-				 
+
 				 <td class='title'>操作</td>
 			 </tr>
-			 <?php 
+			 <?php
 			 	foreach ($statu_hardware as $hardware)
 			 	{
 			 ?>
@@ -65,7 +65,7 @@ $(function(){
 				 <td ><?php echo $hardware['disk'];?></td>
 				 <td><a href="demo.php?delete=hardware&pk=<?php echo $hardware['pk']; ?>">删除</a></td>
 			 </tr>
-			 <?php 
+			 <?php
 			 	}
 			 ?>
 		</table>

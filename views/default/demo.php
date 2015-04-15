@@ -3,7 +3,7 @@ try{
 if(isset($_GET['delete']))
 {
 	//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if(isset($_GET['pk']) && $ref['host'] == $host && $_GET['delete']=='info')
 	{

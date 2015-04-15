@@ -4,7 +4,7 @@
 if(!empty($_POST))
 {
 		//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if($ref['host'] == $host){
 		$res = httpRequest('http://api.icdn.me:8000/setting/u/info/','post',array('remarks'=>$_POST['remarks'],'is_global'=>(bool)$_POST['is_global']));
@@ -13,7 +13,7 @@ if(!empty($_POST))
 if($_GET['delete']==1)
 {
 	//必须是本站的删除请求
-	$host = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['SERVER_NAME'];
 	$ref = parse_url($_SERVER['HTTP_REFERER']);
 	if(isset($_GET['pk']) && $ref['host'] == $host)
 	{
@@ -105,13 +105,13 @@ $details = is_array($details[0])?$details:array($details);
 					<tr><td colspan=2 style='text-align:center' class='close'>关闭</td></tr>
 				 	<?php  foreach ($statu['options'] as $key=>$option){?>
 				 	<tr><td><b><?php echo $key?> </b></td><td>
-				 	<?php 
+				 	<?php
 				 	if(is_array($option))
 				 	{
 				 		foreach ($option as $opk => $op)
 				 		{
 					 		$str = $opk .':<br><table class="grand">';
-					 		foreach ($op as $k=>$v)	
+					 		foreach ($op as $k=>$v)
 					 		{
 					 			$str .= '<tr><td>'.$k.'</td><td>'.$v.'</td></tr>';
 					 		}
@@ -143,8 +143,8 @@ $details = is_array($details[0])?$details:array($details);
 			</table>
 		</div>
 		</div>
-		
 
-		
+
+
     </div>
 </div>
